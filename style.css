@@ -1,0 +1,170 @@
+.nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+    }
+    
+    .nav .btn {
+    pointer-events: all;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    }
+
+
+    .nav {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      user-select: none;
+    
+      & .btn {
+        background-color: rgba(255,255,255,0.5);
+        color: rgba(0,0,0,0.7);
+        border: 2px solid rgba(0,0,0,0.6);
+        margin: 0 0.25rem;
+        padding: 0.75rem;
+        border-radius: 50%;
+        cursor: pointer;
+    
+        &:hover {
+          background-color: rgba(255,255,255,0.3);
+        }
+      }
+    }
+  body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #111;
+  }
+  #container {
+    width: 100%;
+    height: 100%;
+  }
+  .usp-wrapper {
+      position: absolute; /* Position the text absolutely inside the container */
+
+      tab-size: 4;
+      --totl-primary-background: rgba(0,0,0,.8);
+      --totl-primary-font-color: #fff;
+      --totl-primate-font-descolor: #cecece;
+      --unit6: 4rem;
+      --unit5: 3rem;
+      --unit4: 2rem;
+      --unit3: 1.5rem;
+      --unit2: 1rem;
+      --unit1: .5rem;
+      --unit0: 0;
+      --param-width: 16rem;
+      --sidebar-width: 28rem;
+      --gray10: #f5f5f5;
+      --gray15: #efefef;
+      --gray20: #eaeaea;
+      --gray30: #a5a5a5;
+      --gray40: #b7b7b7;
+      --gray60: #555;
+      --gray70: #333;
+      --black: #1e1e1e;
+      --white: #fff;
+      --gold: #f1a22b;
+      --gold-hover: #df9321;
+      --primary-color-40a: #baa2f640;
+      --artboard-color: #0d0d12;
+      --field-bg: var(--artboard-color);
+      --accent-color: #292932;
+      --primary-color-light: #ab8ff1;
+      --primary-color: #8e6ce4;
+      --primary-bg: #281c46;
+      --primary-color-50a: #8e6ce450;
+      --primary-active-bg: #000000;
+      --primary-hover-color: #8960f0;
+      --font-color: #dad7de;
+      --font-secondary-color: #8b8e9c;
+      --font-tertiary-color: #62626f;
+      --bg-color: #17171c;
+      --bg-color-no-alpha: #17171c00;
+      --border-color: #303136;
+      --selected-radio-color: #434351;
+      --menu-bg-color: #030205;
+      --menu-hover-color: #15151f;
+      --selected-fill-color: #fff;
+      --selected-bg-color: #1389fd;
+      --loader-bg-color: #fff;
+      --gray-1: #ccc;
+      --gray-900: #111827;
+      --gray-800: #1f2937;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      cursor: url("undefined") 0 0, auto !important;
+      color: #aeaac0;
+      text-align: center;
+      border-width: 0px;
+      border-style: solid;
+      border-color: rgb(229, 231, 235);
+      --tw-border-spacing-x: 0;
+      --tw-border-spacing-y: 0;
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-rotate: 0;
+      --tw-skew-x: 0;
+      --tw-skew-y: 0;
+      --tw-scale-x: 1;
+      --tw-scale-y: 1;
+      --tw-pan-x: ;
+      --tw-pan-y: ;
+      --tw-pinch-zoom: ;
+      --tw-scroll-snap-strictness: proximity;
+      --tw-ordinal: ;
+      --tw-slashed-zero: ;
+      --tw-numeric-figure: ;
+      --tw-numeric-spacing: ;
+      --tw-numeric-fraction: ;
+      --tw-ring-inset: ;
+      --tw-ring-offset-width: 0px;
+      --tw-ring-offset-color: #fff;
+      --tw-ring-color: rgb(59 130 246 / .5);
+      --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-ring-shadow: 0 0 #0000;
+      --tw-shadow: 0 0 #0000;
+      --tw-shadow-colored: 0 0 #0000;
+      --tw-blur: ;
+      --tw-brightness: ;
+      --tw-contrast: ;
+      --tw-grayscale: ;
+      --tw-hue-rotate: ;
+      --tw-invert: ;
+      --tw-saturate: ;
+      --tw-sepia: ;
+      --tw-drop-shadow: ;
+      --tw-backdrop-blur: ;
+      --tw-backdrop-brightness: ;
+      --tw-backdrop-contrast: ;
+      --tw-backdrop-grayscale: ;
+      --tw-backdrop-hue-rotate: ;
+      --tw-backdrop-invert: ;
+      --tw-backdrop-opacity: ;
+      --tw-backdrop-saturate: ;
+      --tw-backdrop-sepia: ;
+      box-sizing: border-box;
+      font-family: Overused Grotesk,-apple-system,BlinkMacSystemFont,sans-serif;
+      margin: 0 auto;
+      font-weight: 500;
+      line-height: 1;
+      margin-top: 0;
+      letter-spacing: -.04em;
+      font-size: 4.8rem;
+      max-width: 44rem;
+      top: 50%; /* Move to the vertical center */
+      left: 50%; /* Move to the horizontal center */
+      transform: translate(-50%, -50%); /* Center the element */
+      text-align: center; /* Center the text */
+  }
