@@ -22,6 +22,7 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 5;
+      -webkit-user-select: none;
       user-select: none;
     
       & .btn {

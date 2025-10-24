@@ -92,7 +92,9 @@ console.log(UnicornStudio);
         "/laser.json",
         "/glass-text.json",
         "/wave-gradient.json",
-        "/black-hole.json"
+        "/black-hole.json",
+        "/text-wisp-blur.json",
+        "/retro-filter.json"
       ];
       
       function buildScene(projectSrc) {

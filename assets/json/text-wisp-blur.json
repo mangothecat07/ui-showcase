@@ -1,0 +1,187 @@
+{
+  "history": [
+    {
+      "breakpoints": [],
+      "visible": true,
+      "aspectRatio": 1,
+      "userDownsample": 1,
+      "layerType": "effect",
+      "type": "gradient",
+      "usesPingPong": false,
+      "speed": 0.25,
+      "trackMouse": 0,
+      "trackAxes": "xy",
+      "mouseMomentum": 0,
+      "texture": false,
+      "animating": false,
+      "isMask": 0,
+      "compiledFragmentShaders": [
+        "#version 300 es\nprecision highp float;in vec2 vTextureCoord;uniform vec2 uMousePos;vec3 getColor(int index) { switch(index) { case 0: return vec3(0.08235294117647059, 0.08235294117647059, 0.08235294117647059); case 1: return vec3(0, 0, 0); case 2: return vec3(0, 0, 0); case 3: return vec3(0, 0, 0); case 4: return vec3(0, 0, 0); case 5: return vec3(0, 0, 0); case 6: return vec3(0, 0, 0); case 7: return vec3(0, 0, 0); case 8: return vec3(0, 0, 0); case 9: return vec3(0, 0, 0); case 10: return vec3(0, 0, 0); case 11: return vec3(0, 0, 0); case 12: return vec3(0, 0, 0); case 13: return vec3(0, 0, 0); case 14: return vec3(0, 0, 0); case 15: return vec3(0, 0, 0); default: return vec3(0.0); } }const float PI = 3.14159265;vec2 rotate(vec2 coord, float angle) { float s = sin(angle); float c = cos(angle); return vec2( coord.x * c - coord.y * s, coord.x * s + coord.y * c ); }out vec4 fragColor;vec3 getColor(vec2 uv) {return vec3(0.08235294117647059, 0.08235294117647059, 0.08235294117647059); }void main() {vec2 uv = vTextureCoord; vec2 pos = vec2(0.5, 0.5) + mix(vec2(0), (uMousePos-0.5), 0.0000); uv -= pos; uv /= (0.5000*2.); uv = rotate(uv, (0.0000 - 0.5) * 2. * PI); vec4 color = vec4(getColor(uv), 1.); fragColor = color; }"
+      ],
+      "compiledVertexShaders": [
+        "#version 300 es\nprecision mediump float;in vec3 aVertexPosition; in vec2 aTextureCoord;uniform mat4 uMVMatrix; uniform mat4 uPMatrix;out vec2 vTextureCoord; out vec3 vVertexPosition;void main() { gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0); vTextureCoord = aTextureCoord; }"
+      ],
+      "data": {
+        "downSample": 0.5,
+        "depth": false,
+        "uniforms": {},
+        "isBackground": true
+      },
+      "id": "effect"
+    },
+    {
+      "breakpoints": [],
+      "visible": true,
+      "locked": false,
+      "aspectRatio": 1,
+      "layerName": "",
+      "userDownsample": 1,
+      "isElement": true,
+      "opacity": 0.8,
+      "effects": ["4133e01c-e263-4ced-8521-d1ae5fd3d8e5"],
+      "displace": 0,
+      "trackMouse": 0,
+      "anchorPoint": "center",
+      "mouseMomentum": 0,
+      "blendMode": "NORMAL",
+      "bgDisplace": 0,
+      "mask": 0,
+      "maskBackground": { "type": "Vec3", "_x": 0, "_y": 0, "_z": 0 },
+      "maskAlpha": 0,
+      "maskDepth": 0,
+      "dispersion": 0,
+      "alignment": "center",
+      "axisTilt": 0,
+      "states": { "appear": [], "scroll": [], "hover": [] },
+      "translateX": -0.5,
+      "translateY": -0.5,
+      "layerType": "image",
+      "imageLoaded": false,
+      "width": 1,
+      "widthMode": "relative",
+      "height": 1,
+      "heightMode": "relative",
+      "left": 0.5,
+      "leftMode": "relative",
+      "top": 0.5,
+      "topMode": "relative",
+      "rotation": 0,
+      "trackAxes": "xy",
+      "fitToCanvas": 0,
+      "src": "./assets/images/img.png",
+      "naturalWidth": 1,
+      "naturalHeight": 1,
+      "compiledFragmentShaders": [
+        "#version 300 es\nprecision highp float; in vec2 vTextureCoord; in vec3 vVertexPosition;uniform sampler2D uBgTexture; uniform sampler2D uTexture; uniform vec2 uMousePos; uniform int uSampleBg;out vec4 fragColor;void main() { vec2 uv = vTextureCoord; vec2 pos = mix(vec2(0), (uMousePos - 0.5), 0.0000);uv = uv - pos;vec4 color = texture(uTexture, uv); vec4 background = vec4(0);if(uSampleBg == 1) { background = texture(uBgTexture, vTextureCoord); }color = mix(background, color / max(color.a, 0.0001), color.a * 0.8000);fragColor = color; }"
+      ],
+      "compiledVertexShaders": [
+        "#version 300 es\nprecision highp float;in vec3 aVertexPosition; in vec2 aTextureCoord;uniform mat4 uMVMatrix; uniform mat4 uPMatrix; uniform mat4 uTextureMatrix; uniform vec2 uMousePos;out vec2 vTextureCoord; out vec3 vVertexPosition;void main() { float angleX = uMousePos.y * 0.5 - 0.25; float angleY = (1.-uMousePos.x) * 0.5 - 0.25;mat4 rotateX = mat4(1.0, 0.0, 0.0, 0.0, 0.0, cos(angleX), -sin(angleX), 0.0, 0.0, sin(angleX), cos(angleX), 0.0, 0.0, 0.0, 0.0, 1.0); mat4 rotateY = mat4(cos(angleY), 0.0, sin(angleY), 0.0, 0.0, 1.0, 0.0, 0.0, -sin(angleY), 0.0, cos(angleY), 0.0, 0.0, 0.0, 0.0, 1.0);mat4 rotationMatrix = rotateX * rotateY; gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0); vVertexPosition = (rotationMatrix * vec4(aVertexPosition, 1.0)).xyz; vTextureCoord = (uTextureMatrix * vec4(aTextureCoord, 0.0, 1.0)).xy; }"
+      ],
+      "data": { "uniforms": {} },
+      "id": "image"
+    },
+    {
+      "breakpoints": [],
+      "visible": true,
+      "aspectRatio": 1,
+      "userDownsample": 1,
+      "layerType": "effect",
+      "type": "spotlight",
+      "usesPingPong": false,
+      "trackMouse": 1,
+      "trackAxes": "xy",
+      "mouseMomentum": 0,
+      "texture": false,
+      "animating": false,
+      "isMask": 0,
+      "compiledFragmentShaders": [
+        "#version 300 es\nprecision highp float; precision highp int;in vec2 vTextureCoord;uniform sampler2D uTexture;uniform vec2 uResolution;out vec4 fragColor;const int kernelSize = 36;float getGaussianWeight(int index) { switch(index) { case 0: return 0.00094768; case 1: return 0.00151965; case 2: return 0.00237008; case 3: return 0.00359517; case 4: return 0.0053041; case 5: return 0.00761097; case 6: return 0.01062197; case 7: return 0.01441804; case 8: return 0.01903459; case 9: return 0.0244409; case 10: return 0.03052299; case 11: return 0.03707432; case 12: return 0.04379813; case 13: return 0.05032389; case 14: return 0.05623791; case 15: return 0.06112521; case 16: return 0.06461716; case 17: return 0.06643724; case 18: return 0.06643724; case 19: return 0.06461716; case 20: return 0.06112521; case 21: return 0.05623791; case 22: return 0.05032389; case 23: return 0.04379813; case 24: return 0.03707432; case 25: return 0.03052299; case 26: return 0.0244409; case 27: return 0.01903459; case 28: return 0.01441804; case 29: return 0.01062197; case 30: return 0.00761097; case 31: return 0.0053041; case 32: return 0.00359517; case 33: return 0.00237008; case 34: return 0.00151965; case 35: return 0.00094768; default: return 0.0; } }vec4 GaussianBlur(sampler2D tex, vec2 uv, vec2 direction) { vec4 color = vec4(0.0); float weightSum = 0.0;float amount = (0.0800 + 0.1) * 2.; float aspectRatio = uResolution.x/uResolution.y;direction.x /= aspectRatio;color += texture(tex, uv) * getGaussianWeight(0); for (int i = 0; i < kernelSize; i++) { float x = float(i - kernelSize / 2) * amount; color += texture(tex, uv + vec2(x/1000.) * direction) * getGaussianWeight(i); } return color; }vec4 getColor(vec2 uv) { return GaussianBlur(uTexture, uv, vec2(1, 0)); }void main() { vec4 clipColor = texture(uTexture, vTextureCoord); if(clipColor.a == 0.) { fragColor = vec4(0); return; }vec2 uv = vTextureCoord; vec4 color = getColor(uv); fragColor = color;}",
+        "#version 300 es\nprecision highp float; precision highp int;in vec2 vTextureCoord;uniform sampler2D uTexture;uniform vec2 uResolution;out vec4 fragColor;const int kernelSize = 36;float getGaussianWeight(int index) { switch(index) { case 0: return 0.00094768; case 1: return 0.00151965; case 2: return 0.00237008; case 3: return 0.00359517; case 4: return 0.0053041; case 5: return 0.00761097; case 6: return 0.01062197; case 7: return 0.01441804; case 8: return 0.01903459; case 9: return 0.0244409; case 10: return 0.03052299; case 11: return 0.03707432; case 12: return 0.04379813; case 13: return 0.05032389; case 14: return 0.05623791; case 15: return 0.06112521; case 16: return 0.06461716; case 17: return 0.06643724; case 18: return 0.06643724; case 19: return 0.06461716; case 20: return 0.06112521; case 21: return 0.05623791; case 22: return 0.05032389; case 23: return 0.04379813; case 24: return 0.03707432; case 25: return 0.03052299; case 26: return 0.0244409; case 27: return 0.01903459; case 28: return 0.01441804; case 29: return 0.01062197; case 30: return 0.00761097; case 31: return 0.0053041; case 32: return 0.00359517; case 33: return 0.00237008; case 34: return 0.00151965; case 35: return 0.00094768; default: return 0.0; } }vec4 GaussianBlur(sampler2D tex, vec2 uv, vec2 direction) { vec4 color = vec4(0.0); float weightSum = 0.0;float amount = (0.0800 + 0.1) * 2.; float aspectRatio = uResolution.x/uResolution.y;direction.x /= aspectRatio;color += texture(tex, uv) * getGaussianWeight(0); for (int i = 0; i < kernelSize; i++) { float x = float(i - kernelSize / 2) * amount; color += texture(tex, uv + vec2(x/1000.) * direction) * getGaussianWeight(i); } return color; }vec4 getColor(vec2 uv) { return GaussianBlur(uTexture, uv, vec2(0, 1)); }void main() { vec4 clipColor = texture(uTexture, vTextureCoord); if(clipColor.a == 0.) { fragColor = vec4(0); return; }vec2 uv = vTextureCoord; vec4 color = getColor(uv); fragColor = color;}",
+        "#version 300 es\nprecision highp float; precision highp int;in vec2 vTextureCoord;uniform sampler2D uTexture; uniform sampler2D uBgTexture;uniform vec2 uMousePos; uniform vec2 uResolution;uvec2 pcg2d(uvec2 v) { v = v * 1664525u + 1013904223u; v.x += v.y * v.y * 1664525u + 1013904223u; v.y += v.x * v.x * 1664525u + 1013904223u; v ^= v >> 16; v.x += v.y * v.y * 1664525u + 1013904223u; v.y += v.x * v.x * 1664525u + 1013904223u; return v; }float randFibo(vec2 p) { uvec2 v = floatBitsToUint(p); v = pcg2d(v); uint r = v.x ^ v.y; return float(r) / float(0xffffffffu); }out vec4 fragColor;const int kernelSize = 36;float luma(vec3 color) { return dot(color, vec3(0.299, 0.587, 0.114)); }float getHeight(vec2 uv) { vec4 col = texture(uTexture, uv); return luma(col.rgb); }vec4 computeNoise(vec2 uv) { vec2 ste = (1. / uResolution); float height = getHeight(uv); vec2 dxy = height - vec2(getHeight(uv + vec2(ste.x, 0.)), getHeight(uv + vec2(0., ste.y)));return vec4(normalize(vec3(dxy * (0.02 + 0.04 * 0.0800) / ste, 2.)), height); }vec3 Tonemap_tanh(vec3 x) { x = clamp(x, -40.0, 40.0); return (exp(x) - exp(-x)) / (exp(x) + exp(-x)); }float light(vec3 p, vec3 normal, vec3 lightPos) { vec3 direction = normalize(lightPos - p); float specular = 0.5 * pow(max(dot(direction, reflect(-direction, normal)), 0.0), 2.0); return max(0.1, dot(normal, direction) * 1.2 - specular); }vec4 getPointlight(vec2 uv) { vec2 pos = vec2(0.5104529616724738, 0.5431422236300285) + mix(vec2(0), (uMousePos-0.5), 1.0000); vec2 aspectRatio = vec2(uResolution.x/uResolution.y, 1); vec4 color = texture(uBgTexture, uv); float lum = luma(color.rgb); float dist = distance(uv * aspectRatio, pos * aspectRatio) / (1.1500 + 0.5); float hightlighDist = distance(uv * aspectRatio, pos * aspectRatio) / (1.1500 + 0.5)/2.; float spot = max(0., max(0., (1.-dist)) * max(0., (1.-dist))); float highlightSpot = max(0., max(0., (1.-hightlighDist)) * max(0., (1.-hightlighDist))); vec3 normal = computeNoise(uv).rgb * lum; vec2 lightDir = pos * aspectRatio - uv * aspectRatio; float lightDistance = 1.-length(lightDir); lightDir = normalize(lightDir); vec3 diff = vec3(max(dot(normal, vec3(lightDir, 0.5)), 0.0));float specular = light(vec3(uv, 1.), normal, vec3(pos, 1.)); specular = smoothstep(0., 1., specular) * 2.; float intensity = 0.6300 * 3.; vec3 base = color.rgb * vec3(0.6705882352941176, 0.8941176470588236, 1) * max(0., spot) * intensity; color.rgb = color.rgb * 0.4800 + base * diff * vec3(0.6705882352941176, 0.8941176470588236, 1) * max(0., spot) * intensity; color.rgb += specular * vec3(0.6705882352941176, 0.8941176470588236, 1) * max(0., spot * 4.) * 1.0000; color.rgb = Tonemap_tanh(color.rgb); float dither = (randFibo(gl_FragCoord.xy) - 0.5) / 255.0; color.rgb += dither; return color; }vec4 getColor(vec2 uv) { return getPointlight(uv); }void main() { vec4 clipColor = texture(uTexture, vTextureCoord); if(clipColor.a == 0.) { fragColor = vec4(0); return; }vec2 uv = vTextureCoord; vec4 color = getColor(uv); fragColor = color;}"
+      ],
+      "compiledVertexShaders": [
+        "#version 300 es\nprecision mediump float;in vec3 aVertexPosition; in vec2 aTextureCoord;uniform mat4 uMVMatrix; uniform mat4 uPMatrix; uniform mat4 uTextureMatrix;out vec2 vTextureCoord; out vec3 vVertexPosition;void main() { gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0); vTextureCoord = (uTextureMatrix * vec4(aTextureCoord, 0.0, 1.0)).xy; }"
+      ],
+      "data": {
+        "downSample": 0.5,
+        "depth": false,
+        "uniforms": {},
+        "isBackground": false,
+        "passes": [
+          { "prop": "pass", "value": 1, "downSample": 0.5 },
+          { "prop": "pass", "value": 2, "includeBg": true }
+        ]
+      },
+      "id": "effect1"
+    },
+    {
+      "breakpoints": [],
+      "visible": true,
+      "aspectRatio": 1,
+      "userDownsample": 1,
+      "layerType": "effect",
+      "type": "bokeh",
+      "usesPingPong": false,
+      "trackMouse": 1,
+      "trackAxes": "xy",
+      "mouseMomentum": 0,
+      "texture": false,
+      "animating": false,
+      "isMask": 0,
+      "compiledFragmentShaders": [
+        "#version 300 es\nprecision highp float; in vec3 vVertexPosition; in vec2 vTextureCoord; uniform sampler2D uTexture; uniform sampler2D uBlueNoise;uniform vec2 uMousePos; uniform vec2 uResolution;float ease (int easingFunc, float t) { return t < 0.5 ? 2.0 * t * t : -1.0 + (4.0 - 2.0 * t) * t; }const float PI = 3.14159265; const float PI2 = 6.28318530718; const int SAMPLES = 128;vec2 getDiskSample(int index) { switch(index) { case 0: return vec2(0, 0); case 1: return vec2(0.7062550187110901, 0.03469608351588249); case 2: return vec2(0.49759235978126526, 0.0490085706114769); case 3: return vec2(0.8566519618034363, 0.1270723193883896); case 4: return vec2(0.34675997495651245, 0.06897484511137009); case 5: return vec2(0.7668770551681519, 0.19209270179271698); case 6: return vec2(0.5860038995742798, 0.17776232957839966); case 7: return vec2(0.880733847618103, 0.31513160467147827); case 8: return vec2(0.2309698760509491, 0.09567085653543472); case 9: return vec2(0.6779919862747192, 0.3206663131713867); case 10: return vec2(0.49300897121429443, 0.2635187804698944); case 11: return vec2(0.7731460928916931, 0.46340593695640564); case 12: return vec2(0.3600369095802307, 0.24056896567344666); case 13: return vec2(0.6659845113754272, 0.4939277768135071); case 14: return vec2(0.5112983584403992, 0.41961172223091125); case 15: return vec2(0.7174228429794312, 0.6502341628074646); case 16: return vec2(0.125, 0.125); case 17: return vec2(0.4894784986972809, 0.5400562882423401); case 18: return vec2(0.336437851190567, 0.40995070338249207); case 19: return vec2(0.5265287756919861, 0.7099418640136719); case 20: return vec2(0.21960841119289398, 0.32866722345352173); case 21: return vec2(0.41647082567214966, 0.694839596748352); case 22: return vec2(0.3004576563835144, 0.5621167421340942); case 23: return vec2(0.40702033042907715, 0.8605721592903137); case 24: return vec2(0.11717239022254944, 0.28287917375564575); case 25: return vec2(0.25959107279777527, 0.725508451461792); case 26: return vec2(0.17019447684288025, 0.5610560178756714); case 27: return vec2(0.2231915444135666, 0.8910306096076965); case 28: return vec2(0.0912451446056366, 0.45872029662132263); case 29: return vec2(0.12439680844545364, 0.8386151790618896); case 30: return vec2(0.06710775196552277, 0.6813564300537109); case 31: return vec2(0.048294905573129654, 0.9830654263496399); case 32: return vec2(7.654042828657299e-18, 0.125); case 33: return vec2(-0.03523404151201248, 0.7172054052352905); case 34: return vec2(-0.05051687732338905, 0.5129064917564392); case 35: return vec2(-0.1283891648054123, 0.8655294179916382); case 36: return vec2(-0.0731588676571846, 0.3677944839000702); case 37: return vec2(-0.19447903335094452, 0.7764038443565369); case 38: return vec2(-0.18142792582511902, 0.598087728023529); case 39: return vec2(-0.3179328143596649, 0.8885627388954163); case 40: return vec2(-0.10696326941251755, 0.2582321763038635); case 41: return vec2(-0.3250895142555237, 0.6873440146446228); case 42: return vec2(-0.27002641558647156, 0.5051838755607605); case 43: return vec2(-0.4678405523300171, 0.7805448174476624); case 44: return vec2(-0.2503921091556549, 0.37473827600479126); case 45: return vec2(-0.4995090663433075, 0.6735100150108337); case 46: return vec2(-0.4270390570163727, 0.5203486084938049); case 47: return vec2(-0.6556304097175598, 0.7233766317367554); case 48: return vec2(-0.1530931144952774, 0.1530931144952774); case 49: return vec2(-0.547940731048584, 0.49662455916404724); case 50: return vec2(-0.4211843013763428, 0.34565702080726624); case 51: return vec2(-0.7170061469078064, 0.5317679643630981); case 52: return vec2(-0.3447090983390808, 0.23032724857330322); case 53: return vec2(-0.7030628323554993, 0.42139965295791626); case 54: return vec2(-0.5728246569633484, 0.3061811625957489); case 55: return vec2(-0.867959201335907, 0.41051411628723145); case 56: return vec2(-0.3055444359779358, 0.12656064331531525); case 57: return vec2(-0.7349926233291626, 0.2629845440387726); case 58: return vec2(-0.5736655592918396, 0.17401954531669617); case 59: return vec2(-0.8992430567741394, 0.22524864971637726); case 60: return vec2(-0.47482064366340637, 0.09444769471883774); case 61: return vec2(-0.8476815819740295, 0.12574167549610138); case 62: return vec2(-0.692619264125824, 0.06821703910827637); case 63: return vec2(-0.9909616708755493, 0.04868282377719879); case 64: return vec2(-0.0883883461356163, 1.0824450754283193e-17); case 65: return vec2(-0.7117512822151184, -0.03496609628200531); case 66: return vec2(-0.5053074359893799, -0.04976843670010567); case 67: return vec2(-0.8611021637916565, -0.12773244082927704); case 68: return vec2(-0.35743197798728943, -0.07109764218330383); case 69: return vec2(-0.7716551423072815, -0.19328954815864563); case 70: return vec2(-0.5920765995979309, -0.17960448563098907); case 71: return vec2(-0.8846569657325745, -0.3165353238582611); case 72: return vec2(-0.2449805587530136, -0.10147427022457123); case 73: return vec2(-0.6826840043067932, -0.3228854835033417); case 74: return vec2(-0.49913355708122253, -0.2667924463748932); case 75: return vec2(-0.7768542766571045, -0.4656285345554352); case 76: return vec2(-0.36746111512184143, -0.2455296814441681); case 77: return vec2(-0.6697578430175781, -0.49672624468803406); case 78: return vec2(-0.5158433318138123, -0.42334166169166565); case 79: return vec2(-0.7204058766365051, -0.6529378294944763); case 80: return vec2(-0.1397542506456375, -0.1397542506456375); case 81: return vec2(-0.4930644631385803, -0.5440127849578857); case 82: return vec2(-0.34107857942581177, -0.41560545563697815); case 83: return vec2(-0.529154896736145, -0.7134827375411987); case 84: return vec2(-0.22503165900707245, -0.33678367733955383); case 85: return vec2(-0.41894248127937317, -0.6989632844924927); case 86: return vec2(-0.3033328950405121, -0.5674959421157837); case 87: return vec2(-0.40877094864845276, -0.8642735481262207); case 88: return vec2(-0.12195689231157303, -0.2944299876689911); case 89: return vec2(-0.26129332184791565, -0.7302659153938293); case 90: return vec2(-0.17211763560771942, -0.567395806312561); case 91: return vec2(-0.22422246634960175, -0.8951462507247925); case 92: return vec2(-0.09286022931337357, -0.46683987975120544); case 93: return vec2(-0.12507104873657227, -0.8431605696678162); case 94: return vec2(-0.06766466796398163, -0.6870108842849731); case 95: return vec2(-0.04848925396800041, -0.9870214462280273); case 96: return vec2(-2.81227478546514e-17, -0.1530931144952774); case 97: return vec2(0.03549996390938759, -0.7226183414459229); case 98: return vec2(0.05125438794493675, -0.5203945636749268); case 99: return vec2(0.12904255092144012, -0.8699342012405396); case 100: return vec2(0.0751635953783989, -0.37787291407585144); case 101: return vec2(0.1956612914800644, -0.7811236381530762); case 102: return vec2(0.18323321640491486, -0.6040389537811279); case 103: return vec2(0.31932422518730164, -0.8924514055252075); case 104: return vec2(0.11218402534723282, -0.27083620429039); case 105: return vec2(0.3272787034511566, -0.6919726729393005); case 106: return vec2(0.27322208881378174, -0.5111625790596008); case 107: return vec2(0.4700421690940857, -0.7842180132865906); case 108: return vec2(0.25516191124916077, -0.38187679648399353); case 109: return vec2(0.5022764205932617, -0.6772413849830627); case 110: return vec2(0.43070468306541443, -0.5248152017593384); case 111: return vec2(0.6583119034767151, -0.7263352870941162); case 112: return vec2(0.16535945236682892, -0.16535945236682892); case 113: return vec2(0.5518407225608826, -0.5001592636108398); case 114: return vec2(0.4266902208328247, -0.3501756191253662); case 115: return vec2(0.720512330532074, -0.5343683362007141); case 116: return vec2(0.35245633125305176, -0.23550379276275635); case 117: return vec2(0.7071385979652405, -0.42384254932403564); case 118: return vec2(0.5781042575836182, -0.30900317430496216); case 119: return vec2(0.8716292381286621, -0.41224992275238037); case 120: return vec2(0.31626853346824646, -0.13100272417068481); case 121: return vec2(0.7396891117095947, -0.26466497778892517); case 122: return vec2(0.5798675417900085, -0.1759008914232254); case 123: return vec2(0.9033212661743164, -0.22627019882202148); case 124: return vec2(0.4826694428920746, -0.09600891917943954); case 125: return vec2(0.8521785736083984, -0.12640875577926636); case 126: return vec2(0.6981825828552246, -0.06876497715711594); case 127: return vec2(0.9948862791061401, -0.04887562617659569); default: return vec2(0.0); } }float getBlueNoiseOffset(vec2 st) { ivec2 texSize = ivec2(512, 512); vec4 blueNoise = texelFetch(uBlueNoise, ivec2(fract(st * (uResolution)/vec2(texSize) * vec2(texSize.x/texSize.y, 1.0)) * vec2(texSize)) % texSize, 0); return mod((blueNoise.r - 0.5) * PI2, PI2); }vec4 bokehBlur(vec2 uv, float blurRadius, float intensity) { float aspectRatio = uResolution.x / uResolution.y; vec3 accumulatedColor = vec3(0.0); vec3 accumulatedWeights = vec3(0.0); vec2 pixelSize = vec2(1.0 / aspectRatio, 1.0) * blurRadius * 0.075; float accumulatedAlpha = 0.; float noiseOffset = (getBlueNoiseOffset(uv) - 0.5) * 0.1; float noiseAngle = noiseOffset * PI2; mat2 rotationMatrix = mat2( cos(noiseAngle), -sin(noiseAngle), sin(noiseAngle), cos(noiseAngle) );for (int i = 0; i < 128; i++) { vec2 sampleOffset = rotationMatrix * getDiskSample(i) * pixelSize; float jitterAmount = 0.05 * (sin(float(i) * 0.1) * 0.5 + 0.5); sampleOffset *= 1.0 + jitterAmount * sin(float(i) * 0.7 + noiseOffset); vec4 colorSample = texture(uTexture, uv + sampleOffset); vec3 bokehWeight = vec3(5.0) + pow(colorSample.rgb, vec3(9.0)) * intensity; accumulatedAlpha += colorSample.a;accumulatedColor += colorSample.rgb * bokehWeight; accumulatedWeights += bokehWeight; }return vec4(accumulatedColor / accumulatedWeights, accumulatedAlpha / 128.0); }out vec4 fragColor;vec4 blurPass(vec2 uv) { vec2 pos = vec2(0.5, 0.5) + mix(vec2(0), (uMousePos-0.5), 1.0000); float dis = distance(uv, pos) * 1000.; float tilt = mix(1.-dis * 0.001 , dis * 0.001, 1.0000); return bokehBlur(uv, 0.4900 * ease(3, tilt), 150.0); }vec4 getColor(vec2 uv) { return blurPass(uv); }void main() { vec2 uv = vTextureCoord; vec4 color = vec4(0);if(0.4900 == 0.) { color = texture(uTexture, uv); fragColor = color;return; } color = getColor(uv); fragColor = color;}",
+        "#version 300 es\nprecision highp float; in vec3 vVertexPosition; in vec2 vTextureCoord; uniform sampler2D uTexture; uniform sampler2D uBgTexture; uniform sampler2D uBlueNoise;uniform vec2 uMousePos; uniform vec2 uResolution;float ease (int easingFunc, float t) { return t < 0.5 ? 2.0 * t * t : -1.0 + (4.0 - 2.0 * t) * t; }const float PI = 3.14159265; const float PI2 = 6.28318530718; const int SAMPLES = 128;float getBlueNoiseOffset(vec2 st) { ivec2 texSize = ivec2(512, 512); vec4 blueNoise = texelFetch(uBlueNoise, ivec2(fract(st * (uResolution)/vec2(texSize) * vec2(texSize.x/texSize.y, 1.0)) * vec2(texSize)) % texSize, 0); return mod((blueNoise.r - 0.5) * PI2, PI2); }out vec4 fragColor;vec4 composite(vec2 uv) { vec4 color = vec4(0.); vec2 pos = vec2(0.5, 0.5) + mix(vec2(0), (uMousePos-0.5), 1.0000); float dis = distance(uv, pos) * 1000.; float tilt = mix(1.-dis * 0.001 , dis * 0.001, 1.0000); float strength = ease(3, tilt); vec4 bg = texture(uBgTexture, uv);if(0.4900 <= 0.001) { return bg; }if(strength <= 0.002) { return bg; } float blueNoiseOffset = getBlueNoiseOffset(uv); float blueNoiseStrength = 0.005 * 0.4900 * strength; vec2 offset = vec2(cos(blueNoiseOffset), sin(blueNoiseOffset)) * min(blueNoiseStrength, 0.01); return texture(uTexture, uv + offset); }vec4 getColor(vec2 uv) { return composite(uv); }void main() { vec2 uv = vTextureCoord; vec4 color = vec4(0);if(0.4900 == 0.) { color = texture(uTexture, uv); fragColor = color;return; } color = getColor(uv); fragColor = color;}"
+      ],
+      "compiledVertexShaders": [
+        "#version 300 es\nprecision mediump float;in vec3 aVertexPosition; in vec2 aTextureCoord;uniform mat4 uMVMatrix; uniform mat4 uPMatrix; uniform mat4 uTextureMatrix;out vec2 vTextureCoord; out vec3 vVertexPosition;void main() { gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0); vTextureCoord = (uTextureMatrix * vec4(aTextureCoord, 0.0, 1.0)).xy; }"
+      ],
+      "data": {
+        "downSample": 0.5,
+        "depth": false,
+        "uniforms": {},
+        "isBackground": false,
+        "passes": [{ "prop": "pass", "value": 1, "includeBg": true }],
+        "texture": {
+          "src": "https://assets.unicorn.studio/media/blue_noise_med.png",
+          "sampler": "uBlueNoise"
+        }
+      },
+      "id": "effect2"
+    },
+    {
+      "breakpoints": [],
+      "visible": true,
+      "aspectRatio": 1,
+      "userDownsample": 1,
+      "layerType": "effect",
+      "type": "wisps",
+      "usesPingPong": false,
+      "speed": 0.82,
+      "trackMouse": 0,
+      "trackAxes": "xy",
+      "mouseMomentum": 0,
+      "texture": false,
+      "parentLayer": "4133e01c-e263-4ced-8521-d1ae5fd3d8e5",
+      "animating": true,
+      "isMask": 0,
+      "compiledFragmentShaders": [
+        "#version 300 es\nprecision highp float;in vec3 vVertexPosition; in vec2 vTextureCoord; uniform sampler2D uTexture; uniform float uTime; uniform vec2 uMousePos; uniform vec2 uResolution; vec3 blend (int blendMode, vec3 src, vec3 dst) { return src * dst; }out vec4 fragColor; const float PI = 3.14159265359; mat2 rot(float a) { return mat2(cos(a), -sin(a), sin(a), cos(a)); }vec2 hash(vec2 p) { p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3))); return -1.0 + 2.0 * fract(sin(p) * 43758.5453123); }float luma(vec3 color) { return dot(color, vec3(0.299, 0.587, 0.114)); }float voronoi_additive(vec2 st, float radius, vec2 mouse_pos, float scale) { vec2 i_st = floor(st); vec2 f_st = fract(st);float wander = 0.0000 * uTime * 0.2; float total_contribution = 0.0;for (int y = -2; y <= 2; y++) { for (int x = -2; x <= 2; x++) { vec2 neighbor = vec2(float(x), float(y)); vec2 cell_id = i_st + neighbor; vec2 point = hash(cell_id); point = 0.5 + 0.5 * sin(5. + wander + 6.2831 * point); vec2 starAbsPos = cell_id + point; vec2 dirToMouse = mouse_pos - starAbsPos; float distToMouse = length(dirToMouse); float attractStrength = 0.0000 * exp(-distToMouse * mix(2.0 + 1.6020 * 2., 0.5, 0.5000)) * 2.; starAbsPos += dirToMouse * attractStrength; vec2 diff = starAbsPos - st; float dist = length(diff);float contribution = radius / max(dist, radius * 0.1); float shimmer_phase = dot(point, vec2(1.0)) * 10. + hash(cell_id).x * 5.0 + uTime * 0.5; float shimmer = mix(1., (sin(shimmer_phase) + 1.), 1.0000); contribution *= shimmer; total_contribution += mix(contribution*contribution, contribution * 2., 0.2500); } }return total_contribution; }vec4 randomStyle() { vec2 uv = vTextureCoord;vec4 bg = texture(uTexture, uv);vec4 color = vec4(0.0); vec2 aspectRatio = vec2(uResolution.x / uResolution.y, 1.0);vec2 mPos = mix(vec2(0.0), (uMousePos - 0.5), 0.0000);uv -= vec2(0.5008710801393729, 0.5026963889768767); uv *= aspectRatio; uv = uv * rot(0.5157 * 2.0 * PI); uv *= 40.0 * 1.6020; uv *= mix(vec2(1.0), vec2(1.0, 0.0), 0.0000); uv /= aspectRatio;mPos = mPos * rot(0.5157 * 2.0 * PI);vec2 mouseGrid = uMousePos; mouseGrid -= vec2(0.5008710801393729, 0.5026963889768767); mouseGrid *= aspectRatio; mouseGrid = mouseGrid * rot(0.5157 * 2.0 * PI); mouseGrid *= 40.0 * 1.6020; mouseGrid *= mix(vec2(1.0), vec2(1.0, 0.0), 0.0000); mouseGrid /= aspectRatio;vec2 movementOffset = vec2(0.0, uTime * 0.2900 * -0.05); vec2 mouseGrid1 = mouseGrid - (mPos * 38.0 * 1.6020) + movementOffset; vec2 mouseGrid2 = mouseGrid - (mPos * 48.0 * 1.6020) + movementOffset;vec2 st1 = uv - (mPos * 38.0 * 1.6020); vec2 st2 = uv - (mPos * 48.0 * 1.6020);vec2 mouse1 = st1 + vec2(0.0, uTime * 0.2900 * -0.05); vec2 mouse2 = st2 + vec2(0.0, uTime * 0.2900 * -0.05);float radius1 = 0.5 * 0.5000; float radius2 = 0.5 * 0.5000;float pass1 = voronoi_additive(mouse1 * aspectRatio, radius1, mouseGrid1 * aspectRatio, 38.0 * 1.6020); float pass2 = voronoi_additive(mouse2 * aspectRatio + vec2(10), radius2, mouseGrid2 * aspectRatio + vec2(10.0), 48.0 * 1.6020);pass1 *= 0.02; pass2 *= 0.04;color.rgb = (pass1 + pass2) * vec3(1, 1, 1) * mix(1.0, bg.r, 0.0000); color.rgb = clamp(color.rgb, 0.0, 1.0);color.rgb = blend(3, bg.rgb, color.rgb);color = vec4(color.rgb, max(bg.a, luma(color.rgb))); return color; }void main() { vec4 color;color = randomStyle(); fragColor = color;}"
+      ],
+      "compiledVertexShaders": [
+        "#version 300 es\nprecision mediump float;in vec3 aVertexPosition; in vec2 aTextureCoord;uniform mat4 uMVMatrix; uniform mat4 uPMatrix; uniform mat4 uTextureMatrix;out vec2 vTextureCoord; out vec3 vVertexPosition;void main() { gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0); vTextureCoord = (uTextureMatrix * vec4(aTextureCoord, 0.0, 1.0)).xy; }"
+      ],
+      "data": { "depth": false, "uniforms": {}, "isBackground": false },
+      "id": "effect3"
+    }
+  ],
+  "options": {
+    "name": "Warp stream",
+    "fps": 120,
+    "dpi": 1,
+    "scale": 1,
+    "isProduction": false
+
+  },
+  "version": "1.4.33",
+  "id": "68GKZhCvVNu7gR7YIMqV"
+}
