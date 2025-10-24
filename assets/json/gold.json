@@ -73,7 +73,7 @@
             "topMode": "relative",
             "rotation": 0,
             "fitToCanvas": 0,
-            "src": "./moltengold.jpg",
+            "src": "./assets/images/moltengold.jpg",
             "naturalWidth": 260,
             "naturalHeight": 260,
             "compiledFragmentShaders": [
@@ -295,7 +295,7 @@
                 "sampler": "uCustomTexture",
                 "thumb": "https://www.svgrepo.com/download/396902/letter-k.svg",
                 "name": "legend.svg",
-                "src": "./image.png"
+                "src": "./assets/images/image.png"
             },
             "speed": 0.5,
             "trackMouseMove": 0,
