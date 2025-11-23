@@ -96,6 +96,7 @@ console.log(UnicornStudio);
         "/text-wisp-blur.json",
         "/retro-filter.json",
         "/tron.json",
+        "/spring-blur.json",
         "/aurora.json"
       ];
       
