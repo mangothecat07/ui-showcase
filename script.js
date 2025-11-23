@@ -98,6 +98,7 @@ console.log(UnicornStudio);
         "/tron.json",
         "/spring-blur.json",
         "/rep-waterfall.json",
+        "/polaris.json",
         "/aurora.json"
       ];
       
