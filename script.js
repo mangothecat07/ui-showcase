@@ -97,6 +97,7 @@ console.log(UnicornStudio);
         "/retro-filter.json",
         "/tron.json",
         "/spring-blur.json",
+        "/rep-waterfall.json",
         "/aurora.json"
       ];
       

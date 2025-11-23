@@ -1,0 +1,351 @@
+{
+  "history": [
+    {
+      "breakpoints": [],
+      "visible": true,
+      "aspectRatio": 1,
+      "userDownsample": 1,
+      "layerType": "effect",
+      "type": "gradient",
+      "usesPingPong": false,
+      "speed": 0.25,
+      "trackMouse": 0,
+      "trackAxes": "xy",
+      "mouseMomentum": 0,
+      "texture": false,
+      "animating": false,
+      "isMask": 0,
+      "compiledFragmentShaders": [
+        "#version 300 es\nprecision highp float;in vec2 vTextureCoord;uniform vec2 uMousePos;vec3 getColor(int index) { switch(index) { case 0: return vec3(0, 0, 0); case 1: return vec3(0, 0, 0); case 2: return vec3(0, 0, 0); case 3: return vec3(0, 0, 0); case 4: return vec3(0, 0, 0); case 5: return vec3(0, 0, 0); case 6: return vec3(0, 0, 0); case 7: return vec3(0, 0, 0); case 8: return vec3(0, 0, 0); case 9: return vec3(0, 0, 0); case 10: return vec3(0, 0, 0); case 11: return vec3(0, 0, 0); case 12: return vec3(0, 0, 0); case 13: return vec3(0, 0, 0); case 14: return vec3(0, 0, 0); case 15: return vec3(0, 0, 0); default: return vec3(0.0); } }const float PI = 3.14159265;vec2 rotate(vec2 coord, float angle) { float s = sin(angle); float c = cos(angle); return vec2( coord.x * c - coord.y * s, coord.x * s + coord.y * c ); }out vec4 fragColor;vec3 getColor(vec2 uv) {return vec3(0, 0, 0); }void main() {vec2 uv = vTextureCoord; vec2 pos = vec2(0.5, 0.5) + mix(vec2(0), (uMousePos-0.5), 0.0000); uv -= pos; uv /= (0.5000*2.); uv = rotate(uv, (0.0000 - 0.5) * 2. * PI); vec4 color = vec4(getColor(uv), 1.); fragColor = color; }"
+      ],
+      "compiledVertexShaders": [
+        "#version 300 es\nprecision mediump float;in vec3 aVertexPosition; in vec2 aTextureCoord;uniform mat4 uMVMatrix; uniform mat4 uPMatrix;out vec2 vTextureCoord; out vec3 vVertexPosition;void main() { gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0); vTextureCoord = aTextureCoord; }"
+      ],
+      "data": {
+        "downSample": 0.5,
+        "depth": false,
+        "uniforms": {},
+        "isBackground": true
+      },
+      "id": "effect"
+    },
+    {
+      "breakpoints": [
+        {
+          "props": {
+            "fontSize": 0.1388888888888889,
+            "top": 0.5,
+            "lineHeight": 0.9471875
+          },
+          "max": null,
+          "name": "Desktop",
+          "min": 992
+        },
+        {
+          "min": 576,
+          "name": "Tablet",
+          "props": { "top": 0.4979095458984375, "lineHeight": 191.578125 },
+          "max": 991
+        },
+        { "max": 575, "props": { "fontSize": 81 }, "name": "Mobile", "min": 0 }
+      ],
+      "visible": true,
+      "locked": false,
+      "aspectRatio": 6.432200593863412,
+      "layerName": "",
+      "userDownsample": 1,
+      "isElement": true,
+      "opacity": 1,
+      "effects": ["1e23e8b3-c136-4880-ae63-330eaa425f93"],
+      "displace": 0,
+      "trackMouse": 0,
+      "anchorPoint": "center",
+      "mouseMomentum": 0,
+      "blendMode": "NORMAL",
+      "bgDisplace": 0,
+      "mask": 0,
+      "maskBackground": { "type": "Vec3", "_x": 0, "_y": 0, "_z": 0 },
+      "maskAlpha": 0,
+      "maskDepth": 0,
+      "dispersion": 0,
+      "axisTilt": 0,
+      "states": { "appear": [], "scroll": [], "hover": [] },
+      "layerType": "text",
+      "justCreated": false,
+      "isSafari": false,
+      "width": 1,
+      "widthMode": "relative",
+      "height": 189.4375,
+      "heightMode": "fixed",
+      "left": 0.5,
+      "leftMode": "relative",
+      "top": 0.5,
+      "topMode": "relative",
+      "rotation": 0,
+      "trackAxes": "xy",
+      "fontSize": 0.1388888888888889,
+      "lineHeight": 0.9471875,
+      "letterSpacing": 0.005,
+      "fontFamily": "Inter Tight",
+      "fontStyle": "700",
+      "fontWeight": "400",
+      "textAlign": "center",
+      "textContent": "KUNAL",
+      "fill": ["#459AFF"],
+      "gradientAngle": 0,
+      "gradientType": "linear",
+      "fontSizeMode": "relative",
+      "noTextAsHtml": false,
+      "fontCSS": {
+        "family": "Inter Tight",
+        "src": "https://assets.unicorn.studio/fonts/google_fonts/NGSnv5HMAFg6IuGlBNMjxJEL2VmU3NS7Z2mj6AiqXCRToK8EPg.ttf"
+      },
+      "compiledFragmentShaders": [
+        "#version 300 es\nprecision highp float; in vec2 vTextureCoord; in vec3 vVertexPosition;uniform vec2 uMousePos; uniform sampler2D uBgTexture; uniform sampler2D uTexture; uniform int uSampleBg;const float STEPS = 24.0; const float PI = 3.1415926;out vec4 fragColor;vec4 getNormalOutput(vec4 color, vec4 background) { color = mix(background, color + background * (1.0 - color.a), 1.0000); return color; }vec4 getOutputByMode(vec4 color, vec4 background) { return getNormalOutput(color, background); }void main() { vec2 uv = vTextureCoord; vec2 pos = mix(vec2(0), (uMousePos - 0.5), 0.0000);uv -= pos;vec4 background = vec4(0); if(uSampleBg == 1) { background = texture(uBgTexture, vTextureCoord); } vec4 color = texture(uTexture, uv);vec4 col = getOutputByMode(color, background);fragColor = col; }"
+      ],
+      "compiledVertexShaders": [
+        "#version 300 es\nprecision highp float;in vec3 aVertexPosition; in vec2 aTextureCoord;uniform mat4 uMVMatrix; uniform mat4 uPMatrix; uniform mat4 uTextureMatrix; uniform vec2 uMousePos;out vec2 vTextureCoord; out vec3 vVertexPosition;void main() { float angleX = uMousePos.y * 0.5 - 0.25; float angleY = (1.-uMousePos.x) * 0.5 - 0.25;mat4 rotateX = mat4(1.0, 0.0, 0.0, 0.0, 0.0, cos(angleX), -sin(angleX), 0.0, 0.0, sin(angleX), cos(angleX), 0.0, 0.0, 0.0, 0.0, 1.0); mat4 rotateY = mat4(cos(angleY), 0.0, sin(angleY), 0.0, 0.0, 1.0, 0.0, 0.0, -sin(angleY), 0.0, cos(angleY), 0.0, 0.0, 0.0, 0.0, 1.0);mat4 rotationMatrix = rotateX * rotateY; gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0); vVertexPosition = (rotationMatrix * vec4(aVertexPosition, 1.0)).xyz; vTextureCoord = (uTextureMatrix * vec4(aTextureCoord, 0.0, 1.0)).xy; }"
+      ],
+      "data": { "uniforms": {} },
+      "id": "text",
+      "windowWidth": 1440
+    },
+    {
+      "breakpoints": [
+        {
+          "props": { "repeatCount": 10 },
+          "min": 992,
+          "name": "Desktop",
+          "max": null
+        },
+        {
+          "props": { "repeatCount": 16 },
+          "min": 0,
+          "name": "Mobile",
+          "max": 575
+        }
+      ],
+      "visible": true,
+      "aspectRatio": 1,
+      "userDownsample": 1,
+      "layerType": "effect",
+      "type": "replicate",
+      "usesPingPong": false,
+      "amount": 0.45,
+      "angle": 0.08333333333333333,
+      "speed": 0.07,
+      "texture": false,
+      "parentLayer": "1e23e8b3-c136-4880-ae63-330eaa425f93",
+      "animating": true,
+      "mouseMomentum": 0,
+      "isMask": 0,
+      "states": {
+        "appear": [
+          {
+            "local": {
+              "pendingChanges": {},
+              "changeDebouncer": null,
+              "dragSession": null
+            },
+            "type": "appear",
+            "id": "b05eb8aa-0a84-4e71-b7fa-bf0166e5e32a",
+            "prop": "amount",
+            "transition": {
+              "delay": 1000,
+              "ease": "s=>s<.5?8*s**4:1-Math.pow(-2*s+2,4)/2",
+              "duration": 1000
+            },
+            "complete": false,
+            "progress": 0,
+            "value": 0,
+            "endValue": 0.545,
+            "initialized": false,
+            "breakpoints": [],
+            "loop": "none",
+            "loopDelay": 0,
+            "uniformData": { "type": "1f", "name": "uSpacing" }
+          },
+          {
+            "local": {
+              "pendingChanges": {},
+              "changeDebouncer": null,
+              "dragSession": null
+            },
+            "type": "appear",
+            "id": "f333bad3-a23c-418a-a999-d3a0d49bd93c",
+            "prop": "angle",
+            "transition": {
+              "duration": 1000,
+              "delay": 1000,
+              "ease": "s=>s<.5?8*s**4:1-Math.pow(-2*s+2,4)/2"
+            },
+            "complete": false,
+            "progress": 0,
+            "value": 0,
+            "endValue": 0.08333333333333333,
+            "initialized": false,
+            "breakpoints": [],
+            "loop": "none",
+            "loopDelay": 0,
+            "uniformData": { "type": "1f", "name": "uAngle" }
+          }
+        ],
+        "scroll": [],
+        "hover": []
+      },
+      "compiledFragmentShaders": [
+        "#version 300 es\nprecision highp float; in vec2 vTextureCoord; uniform sampler2D uTexture; uniform float uSpacing; uniform float uAngle; uniform float uTime; uniform float uRepeatCount;uniform vec2 uResolution;out vec4 fragColor;void main() { vec2 uv = vTextureCoord; float rotation = (uAngle * 2. * 3.141592653); float aspectRatio = uResolution.x/uResolution.y; vec2 aberrated = vec2(0); vec4 col = vec4(0); float repeatSpacing = uSpacing * 0.35 * mix(1., aspectRatio, 0.5); float time = (uTime * 0.025 + 0.0000) / (repeatSpacing + 0.001);const int MAX_REPEATS = 100; for (int i = 0; i < MAX_REPEATS; ++i) { if (float(i) >= uRepeatCount) break; float fi = float(i); float offset = repeatSpacing * (fi - 0.5 * uRepeatCount + fract(time)); aberrated = vec2(offset * sin(rotation), offset * cos(rotation)); col += texture(uTexture, uv + aberrated) * (1.0 - col.a); } fragColor = col;}"
+      ],
+      "compiledVertexShaders": [
+        "#version 300 es\nprecision mediump float;in vec3 aVertexPosition; in vec2 aTextureCoord;uniform mat4 uMVMatrix; uniform mat4 uPMatrix; uniform mat4 uTextureMatrix;out vec2 vTextureCoord; out vec3 vVertexPosition;void main() { gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0); vTextureCoord = (uTextureMatrix * vec4(aTextureCoord, 0.0, 1.0)).xy; }"
+      ],
+      "data": {
+        "depth": false,
+        "uniforms": {
+          "repeatCount": { "name": "uRepeatCount", "type": "1f", "value": 16 }
+        },
+        "isBackground": false
+      },
+      "id": "effect1"
+    },
+    {
+      "breakpoints": [
+        {
+          "name": "Desktop",
+          "min": 992,
+          "max": null,
+          "props": { "trackMouse": 1 }
+        },
+        {
+          "name": "Mobile",
+          "max": 575,
+          "min": 0,
+          "props": { "trackMouse": 0.15 }
+        }
+      ],
+      "visible": true,
+      "aspectRatio": 1,
+      "userDownsample": 1,
+      "layerType": "effect",
+      "type": "sdf_shape",
+      "usesPingPong": false,
+      "texture": {
+        "src": "https://assets.unicorn.studio/images/FPhM1DN6vOTbz0FPlXp48IKazVG2/remix_Framer_msdf_1741633926886.png",
+        "sampler": "uCustomTexture"
+      },
+      "scale": 0.3,
+      "speed": 0.23,
+      "trackMouseMove": 0,
+      "trackAxes": "xy",
+      "mouseMomentum": 1,
+      "trackMouse": 1,
+      "animating": false,
+      "isMask": 0,
+      "states": {
+        "appear": [
+          {
+            "local": {
+              "pendingChanges": {},
+              "changeDebouncer": null,
+              "dragSession": null
+            },
+            "type": "appear",
+            "id": "25bc5fef-ffc1-443a-9edb-432d4eff7100",
+            "prop": "scale",
+            "transition": {
+              "duration": 1000,
+              "ease": "s=>s<.5?8*s**4:1-Math.pow(-2*s+2,4)/2",
+              "delay": 1500
+            },
+            "complete": false,
+            "progress": 0,
+            "value": 0.01,
+            "endValue": 0.3,
+            "initialized": false,
+            "breakpoints": [],
+            "loop": "none",
+            "loopDelay": 0,
+            "uniformData": { "type": "1f", "name": "uScale" }
+          }
+        ],
+        "scroll": [],
+        "hover": []
+      },
+      "compiledFragmentShaders": [
+        "#version 300 es\nprecision highp float; precision highp int;in vec2 vTextureCoord; uniform sampler2D uTexture;uniform float uScale; uniform float uTime;uniform float uTrackMouse; uniform vec2 uMousePos; uniform vec2 uResolution;uvec2 pcg2d(uvec2 v) { v = v * 1664525u + 1013904223u; v.x += v.y * v.y * 1664525u + 1013904223u; v.y += v.x * v.x * 1664525u + 1013904223u; v ^= v >> 16; v.x += v.y * v.y * 1664525u + 1013904223u; v.y += v.x * v.x * 1664525u + 1013904223u; return v; }float randFibo(vec2 p) { uvec2 v = floatBitsToUint(p); v = pcg2d(v); uint r = v.x ^ v.y; return float(r) / float(0xffffffffu); }const float PI = 3.141592653; const float PI2 = 6.283185306; const int DISP_STEPS = 12; const vec3 viewDir = vec3(0,0, -4.25);ivec2 customTexSize; float customTexAspect;const mat3 ROT_Y_90 = mat3( 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, -1.0, 0.0, 0.0 );const mat3 ROT_Z_90 = mat3( 0.0, -1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 );const mat3 ROT_X_90 = mat3( 1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0 );mat3 rotY(float ang) { float c = cos(ang), s = sin(ang); return mat3(c, 0.0, s, 0.0, 1.0, 0.0, -s, 0.0, c); }mat3 rotX(float ang) { float c = cos(ang), s = sin(ang); return mat3(1.0, 0.0, 0.0, 0.0, c, -s, 0.0, s, c); }mat3 rotZ(float ang) { float c = cos(ang), s = sin(ang); return mat3(c, -s, 0.0, s, c, 0.0, 0.0, 0.0, 1.0); }vec3 twistY(vec3 p, float amount) { float c = cos(amount * p.y); float s = sin(amount * p.y); mat2 m = mat2(c, -s, s, c); return vec3(m * p.xz, p.y); }vec3 twistX(vec3 p, float amount) { float c = cos(amount * p.x); float s = sin(amount * p.x); mat2 m = mat2(c, -s, s, c); return vec3(p.x, m * p.yz); }float smin(float a, float b, float k) { float h = max(k - abs(a - b), 0.0); return min(a, b) - h * h * 0.25 / k; }float honeycomb(vec3 p, float r) { vec3 np = normalize(p); float latitude = acos(np.x); float freq = 10.0; float phase = 1. + uTime * 0.2; float wave = sin(latitude * freq + phase) * cos(latitude * freq + phase); float waveAmplitude = 0.01 + 0.7700 * 0.1; float modifiedRadius = r + wave * waveAmplitude; float baseSphere = length(p) - r * 0.8; float modifiedSphere = length(p) - modifiedRadius; return smin(baseSphere, modifiedSphere, 0.01); }float sdStar5(vec2 p, float r, float rf) { const vec2 k1 = vec2(0.809016994375, -0.587785252292); const vec2 k2 = vec2(-k1.x,k1.y); p.x = abs(p.x); p -= 2.0*max(dot(k1,p),0.0)*k1; p -= 2.0*max(dot(k2,p),0.0)*k2; p.x = abs(p.x); p.y -= r; vec2 ba = rf*vec2(-k1.y,k1.x) - vec2(0,1); float h = clamp( dot(p,ba)/dot(ba,ba), 0.0, r ); return length(p-ba*h) * sign(p.y*ba.x-p.x*ba.y); }vec3 stripePattern(vec3 x) { x *= 5.; x *= rotY(radians(45.)); x *= rotX(radians(45.)); float dot = sin(x.x); return vec3(dot * normalize(dot)); }vec3 getSurfaceTexture(vec3 coord, float frequency) { return stripePattern(coord * frequency); }vec3 getRepeat(vec3 p) { float spacing = (0.3600 + 0.0000 * 0.38) * 8.; return p; }vec3 getThreeDRepeat(vec3 p) { float spacing = (0.3600 + 0.0000 * 0.38) * 8.; return p; }vec3 getAdjustedP(vec3 p) { float scale = max(uScale, 0.000000001); float scaleFactor = 1.0/scale; vec3 adjustedP = p * scaleFactor;vec2 twist = vec2(0, 0);adjustedP.xy *= vec2(uResolution.x / uResolution.y, 1);adjustedP *= (1. + (0.0000 + 0.01));vec2 mousePos = mix(vec2(0), uMousePos - 0.5, uTrackMouse); vec2 axis = vec2(-1. * vec3(0.4420832504428719, 0.4715245213667927, 0.5022).y - 1. + mousePos.y/PI, vec3(0.4420832504428719, 0.4715245213667927, 0.5022).x + mousePos.x/PI) * 2.;adjustedP = getRepeat(adjustedP);float baseTime = uTime * 0.02; float timeX = vec3(0, 0, 0).x * baseTime; float timeY = vec3(0, 0, 0).y * baseTime; float timeZ = vec3(0, 0, 0).z * baseTime;mat3 rotYMat = rotY(axis.y * PI); mat3 rotXMat = rotX(axis.x * PI); mat3 rotZMat = rotZ(vec3(0.4420832504428719, 0.4715245213667927, 0.5022).z * 2.0 * PI);mat3 combinedRotation = rotZMat * rotYMat * rotXMat; mat3 combinedAnimation = rotZ(timeZ) * rotX(timeX) * rotY(timeY);adjustedP = combinedRotation * adjustedP; adjustedP = combinedAnimation * adjustedP; adjustedP = getThreeDRepeat(adjustedP); adjustedP = mix(adjustedP, twistY(adjustedP, -1.0 * twist.y), step(0.0, abs(twist.y))); adjustedP = mix(adjustedP, twistX(adjustedP, -1.0 * twist.x), step(0.0, abs(twist.x))); vec3 stx = getSurfaceTexture(adjustedP, 20. * 0.1700) * 0.025 * 0.1900; float mdist = smoothstep(0.3 * mix(1., uScale, 0.5), 0., distance(vTextureCoord, uMousePos)); adjustedP += stx * mix(1., mdist*mdist * 2., 0.0000);return adjustedP; }float getMergedSDF(vec3 p) { p = getAdjustedP(p); return honeycomb(p, 1.); }float fresnel(vec3 eyeVector, vec3 worldNormal, float power) { float NdotV = abs(dot(eyeVector, worldNormal)); float width = fwidth(dot(eyeVector, worldNormal)); float threshold = 0.2; float edgeDampFactor = smoothstep(threshold, -threshold, width); float fresnelFactor = 1.0 - NdotV; return pow(fresnelFactor, power) * mix(1., edgeDampFactor * 2., 0.5); }vec3 noFrostOrDispersion(vec3 rd, vec3 normal) { float ior = 1.0 / (1.0 + 0.2100 * 0.25); vec3 refractedRay = refract(rd, normal, ior); return texture(uTexture, vTextureCoord - refractedRay.xy).rgb; }vec3 frostOrDispersion(vec3 rd, vec3 normal) { vec3 refractionColor = vec3(0); float iorBase = 1. + 0.2100 * 0.25;vec3 dispCoefficients = vec3(0.03, 0.06, 0.1) * 0.3000 * 1.2;for (int i = 0; i < DISP_STEPS; ++i) { float step = float(i) / float(DISP_STEPS); vec3 disp = step * dispCoefficients; vec3 ior = 1.0 / (iorBase + disp);vec3 refractedRayR = refract(rd, normal, ior.r); vec3 refractedRayG = refract(rd, normal, ior.g); vec3 refractedRayB = refract(rd, normal, ior.b);vec2 rayDirOffset = vec2( randFibo(rd.xy + step) - 0.5, randFibo(rd.xy + step + 2.) - 0.5 ) * 0.5; refractedRayR.xy += rayDirOffset * (0.1 + disp.r) * 0.4500; refractedRayG.xy += rayDirOffset * (0.1 + disp.g) * 0.4500; refractedRayB.xy += rayDirOffset * (0.1 + disp.b) * 0.4500;refractionColor.r += texture(uTexture, vTextureCoord - refractedRayR.xy).r; refractionColor.g += texture(uTexture, vTextureCoord - refractedRayG.xy).g; refractionColor.b += texture(uTexture, vTextureCoord - refractedRayB.xy).b; }return clamp(refractionColor / float(DISP_STEPS), 0.0, 1.0); }vec3 calculateNormal(vec3 p, float eps) { vec2 e = vec2(1.0, -1.0) * eps * 0.5; return normalize( e.xyy * getMergedSDF(p + e.xyy) + e.yyx * getMergedSDF(p + e.yyx) + e.yxy * getMergedSDF(p + e.yxy) + e.xxx * getMergedSDF(p + e.xxx) ); }vec3 sampleTexture(vec3 rd, vec3 normal) {return frostOrDispersion(rd, normal);return frostOrDispersion(rd, normal); return noFrostOrDispersion(rd, normal); }float scene(vec3 p) { return max(0.0000000001, getMergedSDF(p) - (0.0000 + 0.005)) * max(uScale, 0.000000001); }const int STEPS = 128; const float MAX_DISTANCE = 100.0;vec4 rayMarch(vec3 ro, vec3 rd) { float pixelSize = 0.0025; float traveled = 0.; vec3 entryPoint = vec3(0.0); vec3 entryNormal = vec3(0.0); float partialAlpha = 0.0; float lastDistance = 0.0; float smoothing = mix(1., 4., 0.0000);for (int i = 0; i < STEPS; ++i) { vec3 currentPos = ro + rd * traveled; float distance = scene(currentPos); float progress = float(i)/float(STEPS); float step = distance * mix(1., 1.5, progress);if (distance > MAX_DISTANCE) break;if (distance < pixelSize) { partialAlpha = 1.; entryPoint = currentPos; entryNormal = calculateNormal(entryPoint, pixelSize * smoothing); break; }lastDistance = distance;traveled += max(step, pixelSize); if (traveled > MAX_DISTANCE) break; }if (partialAlpha == 0.0) { return texture(uTexture, vTextureCoord); }vec3 samplePosition = mix(rd, entryPoint, 1.0000);vec3 refractionColor = texture(uTexture, vTextureCoord).rgb;refractionColor = sampleTexture(samplePosition, entryNormal); vec3 lightDir = vec3(((vec2(vec3(0.25, 0.25, -3).x, 1.-vec3(0.25, 0.25, -3).y) - 0.333) * 3.) - vec2(0.5, 0.4842271293375394), vec3(0.25, 0.25, -3).z); vec3 normLightDir = normalize(lightDir);float lightAndShadow = dot(entryNormal, normLightDir); vec3 lightColor = mix(vec3(1), vec3(0.611764705882353, 0.7803921568627451, 1), 1. - 0.0000); vec3 fresnelEffect = vec3(0.0);fresnelEffect = fresnel(rd, entryNormal, 8.0) * 0.5400 * vec3(0.611764705882353, 0.7803921568627451, 1);vec3 specularEffect = vec3(0.0);vec3 halfwayDir = normalize(lightDir + rd); float specFactor = pow(max(dot(entryNormal, halfwayDir), 0.0), 64.0 * 0.7500 + 0.01); specularEffect = specFactor * 0.7500 * lightColor;vec3 combinedEffects = fresnelEffect + specularEffect; vec3 finalColor = mix(refractionColor, vec3(0.611764705882353, 0.7803921568627451, 1) * lightAndShadow, 0.0000); finalColor += combinedEffects;vec4 outputColor = vec4(finalColor, 1.);return outputColor; }out vec4 fragColor;void main() { vec4 col = vec4(0); vec4 bg = texture(uTexture, vTextureCoord);if(uScale <= 0.0001 || 1.0000 <= 0.0001) { col = vec4(0); if(1 == 1) { col = bg; } fragColor = col; return; }vec2 pos = vec2(0.5, 0.4842271293375394) + mix(vec2(0), (uMousePos-0.5), 0.0000); vec2 uv = vTextureCoord - pos; float fovFactor = tan(radians(20.) * 0.5); vec3 rd = vec3(uv * fovFactor, 0.5); col = rayMarch(viewDir, rd); float dither = (randFibo(vTextureCoord.xy) - 0.5) / 255.0; col += dither;col = mix(bg, col, 1.0000); fragColor = col;}"
+      ],
+      "compiledVertexShaders": [
+        "#version 300 es\nprecision mediump float;in vec3 aVertexPosition; in vec2 aTextureCoord;uniform mat4 uMVMatrix; uniform mat4 uPMatrix; uniform mat4 uTextureMatrix;out vec2 vTextureCoord; out vec3 vVertexPosition;void main() { gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0); vTextureCoord = (uTextureMatrix * vec4(aTextureCoord, 0.0, 1.0)).xy; }"
+      ],
+      "data": {
+        "depth": false,
+        "uniforms": {
+          "trackMouse": { "name": "uTrackMouse", "type": "1f", "value": 0 }
+        },
+        "isBackground": false
+      },
+      "id": "effect2"
+    },
+    {
+      "breakpoints": [
+        {
+          "max": null,
+          "min": 992,
+          "props": { "amount": 0.07200000000000001 },
+          "name": "Desktop"
+        },
+        { "min": 0, "props": { "amount": 0.3 }, "max": 575, "name": "Mobile" }
+      ],
+      "visible": true,
+      "aspectRatio": 1,
+      "userDownsample": 1,
+      "layerType": "effect",
+      "type": "bloom",
+      "usesPingPong": false,
+      "texture": false,
+      "animating": false,
+      "mouseMomentum": 0,
+      "isMask": 0,
+      "compiledFragmentShaders": [
+        "#version 300 es\nprecision highp float; precision highp int;in vec3 vVertexPosition; in vec2 vTextureCoord;uniform sampler2D uTexture;out vec4 fragColor;float luma(vec4 color) { return dot(color.rgb, vec3(0.299, 0.587, 0.114)); }vec4 thresholdPass(vec4 color) { color.rgb = pow(color.rgb, vec3(1.0/2.2)); color.rgb = 1.2 * (color.rgb - 0.5) + 0.5; vec4 bloom = color * smoothstep(0.5200 - 0.1, 0.5200, luma(color)); return vec4(bloom.rgb, color.a); }vec4 getColor(vec4 color) { return thresholdPass(color); }void main() { vec2 uv = vTextureCoord; vec4 color = texture(uTexture, uv); fragColor = getColor(color); }",
+        "#version 300 es\nprecision highp float; precision highp int;in vec3 vVertexPosition; in vec2 vTextureCoord;uniform sampler2D uTexture; uniform float uAmount;uniform vec2 uResolution;out vec4 fragColor;float getExponentialWeight(int index) { switch(index) { case 0: return 1.0000000000; case 1: return 0.7165313106; case 2: return 0.5134171190; case 3: return 0.3678794412; case 4: return 0.2636050919; case 5: return 0.1888756057; case 6: return 0.1353352832; case 7: return 0.0969670595; case 8: return 0.0694877157; default: return 0.0; } }vec4 blur(vec2 uv, bool vertical, float radius, bool diamond) { vec4 color = vec4(0.0); float total_weight = 0.0; float aspectRatio = uResolution.x/uResolution.y;vec2 dir; if (diamond) { dir = vertical ? vec2(1, 1) : vec2(1, -1); } else { dir = vertical ? vec2(0, 1) : vec2(1, 0); } dir *= vec2(0.0900, 1. - 0.0900); dir.x /= aspectRatio; vec4 center = texture(uTexture, uv); float center_weight = getExponentialWeight(0); color += center * center_weight; total_weight += center_weight;radius *= uAmount; for (int i = 1; i <= 8; i++) { float weight = getExponentialWeight(i); float offset = mix(0.015, 0.025, radius) * float(i)/8.; vec4 sample1 = texture(uTexture, uv + offset * dir); vec4 sample2 = texture(uTexture, uv - offset * dir); color += (sample1 + sample2) * weight; total_weight += 2.0 * weight; }return color / total_weight; }vec4 blurPass(vec2 uv, bool vertical, float radius, float intensity, bool diamond) { return blur(uv, vertical, radius, diamond); }vec4 getColor(vec4 color) { return blurPass(vTextureCoord, false, 40., 1.25, true); }void main() { vec2 uv = vTextureCoord; vec4 color = texture(uTexture, uv); fragColor = getColor(color); }",
+        "#version 300 es\nprecision highp float; precision highp int;in vec3 vVertexPosition; in vec2 vTextureCoord;uniform sampler2D uTexture; uniform sampler2D uBgTexture; uniform float uAmount;uniform vec2 uResolution;out vec4 fragColor;float luma(vec4 color) { return dot(color.rgb, vec3(0.299, 0.587, 0.114)); }float getExponentialWeight(int index) { switch(index) { case 0: return 1.0000000000; case 1: return 0.7165313106; case 2: return 0.5134171190; case 3: return 0.3678794412; case 4: return 0.2636050919; case 5: return 0.1888756057; case 6: return 0.1353352832; case 7: return 0.0969670595; case 8: return 0.0694877157; default: return 0.0; } }vec4 blur(vec2 uv, bool vertical, float radius, bool diamond) { vec4 color = vec4(0.0); float total_weight = 0.0; float aspectRatio = uResolution.x/uResolution.y;vec2 dir; if (diamond) { dir = vertical ? vec2(1, 1) : vec2(1, -1); } else { dir = vertical ? vec2(0, 1) : vec2(1, 0); } dir *= vec2(0.0900, 1. - 0.0900); dir.x /= aspectRatio; vec4 center = texture(uTexture, uv); float center_weight = getExponentialWeight(0); color += center * center_weight; total_weight += center_weight;radius *= uAmount; for (int i = 1; i <= 8; i++) { float weight = getExponentialWeight(i); float offset = mix(0.015, 0.025, radius) * float(i)/8.; vec4 sample1 = texture(uTexture, uv + offset * dir); vec4 sample2 = texture(uTexture, uv - offset * dir); color += (sample1 + sample2) * weight; total_weight += 2.0 * weight; }return color / total_weight; }vec4 thresholdPass(vec4 color) { color.rgb = pow(color.rgb, vec3(1.0/2.2)); color.rgb = 1.2 * (color.rgb - 0.5) + 0.5; vec4 bloom = color * smoothstep(0.5200 - 0.1, 0.5200, luma(color)); return vec4(bloom.rgb, color.a); }vec4 blurCombinePass(vec2 uv, bool vertical, float radius, float intensity, bool diamond) { vec4 blurred = blur(uv, vertical, radius, diamond); return (thresholdPass(texture(uBgTexture, uv)) * 0.5 + blurred * intensity); }vec4 getColor(vec4 color) { return blurCombinePass(vTextureCoord, true, 40., 1.25, true); }void main() { vec2 uv = vTextureCoord; vec4 color = texture(uTexture, uv); fragColor = getColor(color); }",
+        "#version 300 es\nprecision highp float; precision highp int;in vec3 vVertexPosition; in vec2 vTextureCoord;uniform sampler2D uTexture; uniform float uAmount;uniform vec2 uResolution;out vec4 fragColor;float getExponentialWeight(int index) { switch(index) { case 0: return 1.0000000000; case 1: return 0.7165313106; case 2: return 0.5134171190; case 3: return 0.3678794412; case 4: return 0.2636050919; case 5: return 0.1888756057; case 6: return 0.1353352832; case 7: return 0.0969670595; case 8: return 0.0694877157; default: return 0.0; } }vec4 blur(vec2 uv, bool vertical, float radius, bool diamond) { vec4 color = vec4(0.0); float total_weight = 0.0; float aspectRatio = uResolution.x/uResolution.y;vec2 dir; if (diamond) { dir = vertical ? vec2(1, 1) : vec2(1, -1); } else { dir = vertical ? vec2(0, 1) : vec2(1, 0); } dir *= vec2(0.0900, 1. - 0.0900); dir.x /= aspectRatio; vec4 center = texture(uTexture, uv); float center_weight = getExponentialWeight(0); color += center * center_weight; total_weight += center_weight;radius *= uAmount; for (int i = 1; i <= 8; i++) { float weight = getExponentialWeight(i); float offset = mix(0.015, 0.025, radius) * float(i)/8.; vec4 sample1 = texture(uTexture, uv + offset * dir); vec4 sample2 = texture(uTexture, uv - offset * dir); color += (sample1 + sample2) * weight; total_weight += 2.0 * weight; }return color / total_weight; }vec4 blurPass(vec2 uv, bool vertical, float radius, float intensity, bool diamond) { return blur(uv, vertical, radius, diamond); }vec4 getColor(vec4 color) { return blurPass(vTextureCoord, false, 15., 1.1, true); }void main() { vec2 uv = vTextureCoord; vec4 color = texture(uTexture, uv); fragColor = getColor(color); }",
+        "#version 300 es\nprecision highp float; precision highp int;in vec3 vVertexPosition; in vec2 vTextureCoord;uniform sampler2D uTexture; uniform sampler2D uBgTexture; uniform float uAmount;uniform vec2 uResolution;out vec4 fragColor;float luma(vec4 color) { return dot(color.rgb, vec3(0.299, 0.587, 0.114)); }float getExponentialWeight(int index) { switch(index) { case 0: return 1.0000000000; case 1: return 0.7165313106; case 2: return 0.5134171190; case 3: return 0.3678794412; case 4: return 0.2636050919; case 5: return 0.1888756057; case 6: return 0.1353352832; case 7: return 0.0969670595; case 8: return 0.0694877157; default: return 0.0; } }vec4 blur(vec2 uv, bool vertical, float radius, bool diamond) { vec4 color = vec4(0.0); float total_weight = 0.0; float aspectRatio = uResolution.x/uResolution.y;vec2 dir; if (diamond) { dir = vertical ? vec2(1, 1) : vec2(1, -1); } else { dir = vertical ? vec2(0, 1) : vec2(1, 0); } dir *= vec2(0.0900, 1. - 0.0900); dir.x /= aspectRatio; vec4 center = texture(uTexture, uv); float center_weight = getExponentialWeight(0); color += center * center_weight; total_weight += center_weight;radius *= uAmount; for (int i = 1; i <= 8; i++) { float weight = getExponentialWeight(i); float offset = mix(0.015, 0.025, radius) * float(i)/8.; vec4 sample1 = texture(uTexture, uv + offset * dir); vec4 sample2 = texture(uTexture, uv - offset * dir); color += (sample1 + sample2) * weight; total_weight += 2.0 * weight; }return color / total_weight; }vec4 thresholdPass(vec4 color) { color.rgb = pow(color.rgb, vec3(1.0/2.2)); color.rgb = 1.2 * (color.rgb - 0.5) + 0.5; vec4 bloom = color * smoothstep(0.5200 - 0.1, 0.5200, luma(color)); return vec4(bloom.rgb, color.a); }vec4 blurCombinePass(vec2 uv, bool vertical, float radius, float intensity, bool diamond) { vec4 blurred = blur(uv, vertical, radius, diamond); return (thresholdPass(texture(uBgTexture, uv)) * 0.5 + blurred * intensity); }vec4 getColor(vec4 color) { return blurCombinePass(vTextureCoord, true, 15., 1.1, true); }void main() { vec2 uv = vTextureCoord; vec4 color = texture(uTexture, uv); fragColor = getColor(color); }",
+        "#version 300 es\nprecision highp float; precision highp int;in vec3 vVertexPosition; in vec2 vTextureCoord;uniform sampler2D uTexture; uniform float uAmount;uniform vec2 uResolution;out vec4 fragColor;float getExponentialWeight(int index) { switch(index) { case 0: return 1.0000000000; case 1: return 0.7165313106; case 2: return 0.5134171190; case 3: return 0.3678794412; case 4: return 0.2636050919; case 5: return 0.1888756057; case 6: return 0.1353352832; case 7: return 0.0969670595; case 8: return 0.0694877157; default: return 0.0; } }vec4 blur(vec2 uv, bool vertical, float radius, bool diamond) { vec4 color = vec4(0.0); float total_weight = 0.0; float aspectRatio = uResolution.x/uResolution.y;vec2 dir; if (diamond) { dir = vertical ? vec2(1, 1) : vec2(1, -1); } else { dir = vertical ? vec2(0, 1) : vec2(1, 0); } dir *= vec2(0.0900, 1. - 0.0900); dir.x /= aspectRatio; vec4 center = texture(uTexture, uv); float center_weight = getExponentialWeight(0); color += center * center_weight; total_weight += center_weight;radius *= uAmount; for (int i = 1; i <= 8; i++) { float weight = getExponentialWeight(i); float offset = mix(0.015, 0.025, radius) * float(i)/8.; vec4 sample1 = texture(uTexture, uv + offset * dir); vec4 sample2 = texture(uTexture, uv - offset * dir); color += (sample1 + sample2) * weight; total_weight += 2.0 * weight; }return color / total_weight; }vec4 blurPass(vec2 uv, bool vertical, float radius, float intensity, bool diamond) { return blur(uv, vertical, radius, diamond); }vec4 getColor(vec4 color) { return blurPass(vTextureCoord, false, 7.5, 1., false); }void main() { vec2 uv = vTextureCoord; vec4 color = texture(uTexture, uv); fragColor = getColor(color); }",
+        "#version 300 es\nprecision highp float; precision highp int;in vec3 vVertexPosition; in vec2 vTextureCoord;uniform sampler2D uTexture; uniform float uAmount;uniform vec2 uResolution;out vec4 fragColor;float getExponentialWeight(int index) { switch(index) { case 0: return 1.0000000000; case 1: return 0.7165313106; case 2: return 0.5134171190; case 3: return 0.3678794412; case 4: return 0.2636050919; case 5: return 0.1888756057; case 6: return 0.1353352832; case 7: return 0.0969670595; case 8: return 0.0694877157; default: return 0.0; } }vec4 blur(vec2 uv, bool vertical, float radius, bool diamond) { vec4 color = vec4(0.0); float total_weight = 0.0; float aspectRatio = uResolution.x/uResolution.y;vec2 dir; if (diamond) { dir = vertical ? vec2(1, 1) : vec2(1, -1); } else { dir = vertical ? vec2(0, 1) : vec2(1, 0); } dir *= vec2(0.0900, 1. - 0.0900); dir.x /= aspectRatio; vec4 center = texture(uTexture, uv); float center_weight = getExponentialWeight(0); color += center * center_weight; total_weight += center_weight;radius *= uAmount; for (int i = 1; i <= 8; i++) { float weight = getExponentialWeight(i); float offset = mix(0.015, 0.025, radius) * float(i)/8.; vec4 sample1 = texture(uTexture, uv + offset * dir); vec4 sample2 = texture(uTexture, uv - offset * dir); color += (sample1 + sample2) * weight; total_weight += 2.0 * weight; }return color / total_weight; }vec4 blurPass(vec2 uv, bool vertical, float radius, float intensity, bool diamond) { return blur(uv, vertical, radius, diamond); }vec4 getColor(vec4 color) { return blurPass(vTextureCoord, true, 7.5, 1., false); }void main() { vec2 uv = vTextureCoord; vec4 color = texture(uTexture, uv); fragColor = getColor(color); }",
+        "#version 300 es\nprecision highp float; precision highp int;in vec3 vVertexPosition; in vec2 vTextureCoord;uniform sampler2D uTexture; uniform sampler2D uBgTexture;uvec2 pcg2d(uvec2 v) { v = v * 1664525u + 1013904223u; v.x += v.y * v.y * 1664525u + 1013904223u; v.y += v.x * v.x * 1664525u + 1013904223u; v ^= v >> 16; v.x += v.y * v.y * 1664525u + 1013904223u; v.y += v.x * v.x * 1664525u + 1013904223u; return v; }float randFibo(vec2 p) { uvec2 v = floatBitsToUint(p); v = pcg2d(v); uint r = v.x ^ v.y; return float(r) / float(0xffffffffu); }out vec4 fragColor;float luma(vec4 color) { return dot(color.rgb, vec3(0.299, 0.587, 0.114)); }vec4 finalPass(vec4 bloomColor) { float dither = (randFibo(gl_FragCoord.xy) - 0.5) / 255.0; bloomColor.rgb *= vec3(0.611764705882353, 0.7803921568627451, 1); bloomColor.rgb += dither; bloomColor.a = luma(bloomColor); vec4 sceneColor = texture(uBgTexture, vTextureCoord); vec4 finalColor = mix(sceneColor, sceneColor + bloomColor, 0.2100 * 1.75); return finalColor; }vec4 getColor(vec4 color) { return finalPass(color); }void main() { vec2 uv = vTextureCoord; vec4 color = texture(uTexture, uv); fragColor = getColor(color); }"
+      ],
+      "compiledVertexShaders": [
+        "#version 300 es\nprecision mediump float;in vec3 aVertexPosition; in vec2 aTextureCoord;uniform mat4 uMVMatrix; uniform mat4 uPMatrix; uniform mat4 uTextureMatrix;out vec2 vTextureCoord; out vec3 vVertexPosition;void main() { gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0); vTextureCoord = (uTextureMatrix * vec4(aTextureCoord, 0.0, 1.0)).xy; }"
+      ],
+      "data": {
+        "downSample": 0.5,
+        "depth": false,
+        "uniforms": {
+          "amount": { "name": "uAmount", "type": "1f", "value": 0.25 }
+        },
+        "isBackground": false,
+        "passes": [
+          { "prop": "pass", "value": 1, "downSample": 0.25 },
+          { "prop": "pass", "value": 2, "downSample": 0.25, "includeBg": true },
+          { "prop": "pass", "value": 3, "downSample": 0.25 },
+          { "prop": "pass", "value": 4, "downSample": 0.25, "includeBg": true },
+          { "prop": "pass", "value": 5, "downSample": 0.5 },
+          { "prop": "pass", "value": 6, "downSample": 0.5, "includeBg": true },
+          { "prop": "pass", "value": 7, "downSample": 1, "includeBg": true }
+        ]
+      },
+      "id": "effect3"
+    }
+  ],
+  "options": {
+    "name": "Tutorial Community (Remix)",
+    "fps": 60,
+    "dpi": 1.5,
+    "scale": 1,
+
+    "isProduction": false  },
+  "version": "1.4.35",
+  "id": "q4iQ8IKz9wseKOkf2SJI"
+}
