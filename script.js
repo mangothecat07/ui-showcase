@@ -99,7 +99,8 @@ console.log(UnicornStudio);
         "/spring-blur.json",
         "/rep-waterfall.json",
         "/polaris.json",
-        "/aurora.json"
+        "/aurora.json",
+        "/matrix.json"
       ];
       
       function buildScene(projectSrc) {
